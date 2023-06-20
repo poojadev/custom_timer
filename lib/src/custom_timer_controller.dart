@@ -79,12 +79,14 @@ class CustomTimerController extends ChangeNotifier {
   }
 
   void _init() {
-    _animationController.duration = Duration(milliseconds: 0);
+    _animationController.duration =
+        Duration(milliseconds: (begin - end).inMilliseconds.abs());
 
     final curvedAnimation =
         CurvedAnimation(parent: _animationController, curve: Curves.linear);
 
-    _animation = IntTween(begin: 0, end: 0).animate(curvedAnimation);
+    _animation = IntTween(begin: begin.inMilliseconds, end: end.inMilliseconds)
+        .animate(curvedAnimation);
   }
 
   void _listener() {
